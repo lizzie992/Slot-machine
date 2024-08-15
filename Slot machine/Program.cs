@@ -86,10 +86,36 @@ namespace Slot_machine
 
             if (answer == "V")  // vertical lines:
             {
-
-
-
+                for (c = 0; c < SIZE; c++)
+                {
+                    for (r = 0; r < SIZE - 1; r++)
+                    {
+                        if (table[r, c] == table[r+1, c]) //if there is a match somewhere in the column:
+                        {
+                            if (r == SIZE - 2) //if we reach the last iteration of the loop and we are still matching, it means that we have a whole line of matches. I write the winning line here as well so that the player can see:
+                            {
+                                Console.Write($"You win! There is a match in the {c + 1}. vertical line: ");
+                                for (r = 0; r < SIZE; r++)
+                                {
+                                    Console.Write(table[r, c]);
+                                }
+                                Console.WriteLine($"\r");
+                                break;
+                            }
+                            else //if it is not the last matching pair, then continue in the next row
+                            {
+                                continue;
+                            }
+                        }
+                        else if (table[r, c] != table[r+1, c]) //as soon as we have a mismatch, we break the loop and move to the next row
+                        {
+                            Console.WriteLine($"The {c + 1}. vertical line did not win!");
+                            break;
+                        }
+                    }
+                }
             }
+
 
             if (answer == "D")  // diagonal lines:
             {
