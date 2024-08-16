@@ -24,7 +24,7 @@ namespace Slot_machine
 
             //creating a 2D array with the desired number of items:
             //int[,] table = new int[SIZE, SIZE];
-            int[,] table = { { 1, 1, 1 }, { 1, 3, 1 }, { 1, 1, 1 } };
+            int[,] table = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
 
             //defining the random number
             Random random = new Random();
@@ -128,10 +128,62 @@ namespace Slot_machine
 
             if (answer == "C")  // center lines:
             {
-                int i = 0; //for counting the loops
                 int m = SIZE / 2; //for defining the middle element of the row/column
-                
-          
+
+                //for the vertical center line:
+                int i = 0;
+                for (r = 0; r < SIZE-1; r++)
+                {
+                    if (table[r, m] != table[r + 1, m])
+                    {
+                        Console.WriteLine($"The vertical center line did not win!");
+                        break;
+                    }
+                    else if (table[r, m] == table[r + 1, m])
+                    {
+                        i++;
+                        if (i == SIZE-1)
+                        {
+                            Console.Write($"You win! There is a match in the vertical center line: ");
+                            for (int x = 0; x < SIZE; x++)
+                            {
+                                Console.Write(table[x, m]);
+                            }
+                            Console.WriteLine($"\r");
+                        }
+                        else
+                        { 
+                            continue; 
+                        }
+                    }
+                }
+                //for the horizontal center line:
+                i = 0;
+                for (c = 0; c < SIZE - 1; c++)
+                {
+                    if (table[m, c] != table[m, c+1])
+                    {
+                        Console.WriteLine($"The horizontal center line did not win!");
+                        break;
+                    }
+                    else if (table[m, c] == table[m, c + 1])
+                    {
+                        i++;
+                        if (i == SIZE - 1)
+                        {
+                            Console.Write($"You win! There is a match in the horizontal center line: ");
+                            for (int x = 0; x < SIZE; x++)
+                            {
+                                Console.Write(table[m, x]);
+                            }
+                            Console.WriteLine($"\r");
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
             }
 
 
