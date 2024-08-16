@@ -24,7 +24,7 @@ namespace Slot_machine
 
             //creating a 2D array with the desired number of items:
             //int[,] table = new int[SIZE, SIZE];
-            int[,] table = { { 1, 1, 1 }, { 1, 2, 3 }, { 1, 2, 3 } };
+            int[,] table = { { 1, 1, 1 }, { 1, 3, 1 }, { 1, 1, 1 } };
 
             //defining the random number
             Random random = new Random();
@@ -61,9 +61,9 @@ namespace Slot_machine
 
             if (answer == "H")  // horizontal lines:
             {
-                int i = 0;
                 for (r = 0; r < SIZE; r++)
                 {
+                    int i = 0;
                     for (c = 0; c < SIZE - 1; c++)
                     {
                         if (table[r, c] != table[r, c + 1]) //as soon as we have a mismatch, we break the loop and move to the next row
@@ -71,15 +71,16 @@ namespace Slot_machine
                             Console.WriteLine($"The {r + 1}. horizontal row did not win!");
                             break;
                         }
+
                         else if (table[r, c] == table[r, c + 1]) //if there is a match somewhere in the row:
                         {
                             i++;
                             if (i == SIZE-1)
                             {
                                 Console.Write($"You win! There is a match in the {r + 1}. horizontal row: ");
-                                for (c = 0; c < SIZE; c++)
+                                for (int x = 0; x < SIZE; x++)
                                 {
-                                    Console.Write(table[r, c]);
+                                    Console.Write(table[r, x]);
                                 }
                                 Console.WriteLine($"\r");
                             }
@@ -93,10 +94,10 @@ namespace Slot_machine
             }
 
             if (answer == "V")  // vertical lines:
-            {
-                int i = 0;
+            {  
                 for (c = 0; c < SIZE; c++)
                 {
+                    int i = 0;
                     for (r = 0; r < SIZE - 1; r++)
                     {
                         if (table[r, c] != table[r + 1, c]) //as soon as we have a mismatch, we break the loop and move to the next row
@@ -107,12 +108,12 @@ namespace Slot_machine
                         else if (table[r, c] == table[r + 1, c]) //if there is a match somewhere in the column:
                         {
                             i++;
-                            if (i == SIZE - 1)
+                            if (i == SIZE-1)
                             {
                                 Console.Write($"You win! There is a match in the {c + 1}. vertical line: ");
-                                for (r = 0; r < SIZE; r++)
+                                for (int x = 0; x < SIZE; x++)
                                 {
-                                    Console.Write(table[r, c]);
+                                    Console.Write(table[x, c]);
                                 }
                                 Console.WriteLine($"\r");
                             }
@@ -123,6 +124,14 @@ namespace Slot_machine
                         }
                     }
                 }
+            }
+
+            if (answer == "C")  // center lines:
+            {
+                int i = 0; //for counting the loops
+                int m = SIZE / 2; //for defining the middle element of the row/column
+                
+          
             }
 
 
