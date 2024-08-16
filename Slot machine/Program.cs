@@ -9,12 +9,18 @@ namespace Slot_machine
             //lets specify the size of the grid, 3x3 or 5x5 etc...
             const int SIZE = 3;
 
-            //specify the possibilities:
-            const string INSTRUCTION = "Please select the game mode below!\r\nYou can choose between: \r\nH=Horizontal lines \r\nV=Vertical lines \r\nD=Diagonal lines";
-
             //this is for the random number generator:
             const int MIN_NUMBER = 1;
             const int MAX_NUMBER = 10;
+
+            //game modes
+            const string C = "Center line";
+            const string H = "All horizontal lines";
+            const string V = "All vertical lines";
+            const string D = "All diagonal lines";
+
+            //specify the possibilities:
+            const string INSTRUCTION = $"Please select the game mode below!\r\nYou can choose between: \r\nC={C} \r\nH={H} \r\nV={V} \r\nD={D}";
 
             //creating a 2D array with the desired number of items:
             int[,] table = new int[SIZE, SIZE];
