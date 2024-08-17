@@ -24,7 +24,7 @@ namespace Slot_machine
 
             //creating a 2D array with the desired number of items:
             //int[,] table = new int[SIZE, SIZE];
-            int[,] table = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
+            int[,] table = { { 1, 2, 1 }, { 2, 1, 2 }, { 1, 2, 1 } };
 
             //defining the random number
             Random random = new Random();
@@ -71,11 +71,10 @@ namespace Slot_machine
                             Console.WriteLine($"The {r + 1}. horizontal row did not win!");
                             break;
                         }
-
-                        else if (table[r, c] == table[r, c + 1]) //if there is a match somewhere in the row:
+                        if (table[r, c] == table[r, c + 1]) //if there is a match somewhere in the row:
                         {
                             count++;
-                            if (count == SIZE-1)
+                            if (count == SIZE - 1)
                             {
                                 Console.Write($"You win! There is a match in the {r + 1}. horizontal row: ");
                                 for (int x = 0; x < SIZE; x++)
@@ -84,7 +83,7 @@ namespace Slot_machine
                                 }
                                 Console.WriteLine($"\r");
                             }
-                            else 
+                            else
                             {
                                 continue;
                             }
@@ -94,7 +93,7 @@ namespace Slot_machine
             }
 
             if (answer == "V")  // vertical lines:
-            {  
+            {
                 for (c = 0; c < SIZE; c++)
                 {
                     int count = 0;
@@ -105,10 +104,10 @@ namespace Slot_machine
                             Console.WriteLine($"The {c + 1}. vertical line did not win!");
                             break;
                         }
-                        else if (table[r, c] == table[r + 1, c]) //if there is a match somewhere in the column:
+                        if (table[r, c] == table[r + 1, c]) //if there is a match somewhere in the column:
                         {
                             count++;
-                            if (count == SIZE-1)
+                            if (count == SIZE - 1)
                             {
                                 Console.Write($"You win! There is a match in the {c + 1}. vertical line: ");
                                 for (int x = 0; x < SIZE; x++)
@@ -132,17 +131,17 @@ namespace Slot_machine
 
                 //for the vertical center line:
                 int count = 0;
-                for (r = 0; r < SIZE-1; r++)
+                for (r = 0; r < SIZE - 1; r++)
                 {
                     if (table[r, m] != table[r + 1, m])
                     {
                         Console.WriteLine($"The vertical center line did not win!");
                         break;
                     }
-                    else if (table[r, m] == table[r + 1, m])
+                    if (table[r, m] == table[r + 1, m])
                     {
                         count++;
-                        if (count == SIZE-1)
+                        if (count == SIZE - 1)
                         {
                             Console.Write($"You win! There is a match in the vertical center line: ");
                             for (int x = 0; x < SIZE; x++)
@@ -152,8 +151,8 @@ namespace Slot_machine
                             Console.WriteLine($"\r");
                         }
                         else
-                        { 
-                            continue; 
+                        {
+                            continue;
                         }
                     }
                 }
@@ -161,12 +160,12 @@ namespace Slot_machine
                 count = 0;
                 for (c = 0; c < SIZE - 1; c++)
                 {
-                    if (table[m, c] != table[m, c+1])
+                    if (table[m, c] != table[m, c + 1])
                     {
                         Console.WriteLine($"The horizontal center line did not win!");
                         break;
                     }
-                    else if (table[m, c] == table[m, c + 1])
+                    if (table[m, c] == table[m, c + 1])
                     {
                         count++;
                         if (count == SIZE - 1)
@@ -189,12 +188,66 @@ namespace Slot_machine
 
             if (answer == "D")  // diagonal lines:
             {
-
-
-
+                c = 0;
+                int count = 0;
+                for (r = 0; r < SIZE - 1; r++) //for diagonal line top left to bottom right
+                {
+                    if (table[r, c] != table[r + 1, c + 1])
+                    {
+                        Console.WriteLine($"The first diagonal line did not win!");
+                        break;
+                    }
+                    if (table[r, c] == table[r + 1, c + 1])
+                    {
+                        count++;
+                        if (count == SIZE - 1)
+                        {
+                            Console.Write($"You win! There is a match in the first diagonal line: ");
+                            for (int x = 0; x < SIZE; x++)
+                            {
+                                Console.Write(table[x, x]);
+                            }
+                            Console.WriteLine($"\r");
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+                count = 0;
+                c = SIZE;
+                for (r = 0; r < SIZE - 1; r++) //for diagonal line top right to bottom left
+                {
+                    c--;
+                    if (table[r, c] != table[r + 1, c - 1])
+                    {
+                        Console.WriteLine($"The second diagonal line did not win!");
+                        break;
+                    }
+                    if (table[r, c] == table[r + 1, c - 1])
+                    {
+                        count++;
+                        if (count == SIZE - 1)
+                        {
+                            Console.Write($"You win! There is a match in the second diagonal line: ");
+                            int y = 0;
+                            for (int x = SIZE - 1; x >= 0; x--)
+                            {
+                                Console.Write(table[y, x]);
+                                y++;
+                            }
+                            Console.WriteLine($"\r");
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
             }
-
-
         }
     }
 }
