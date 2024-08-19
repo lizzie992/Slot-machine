@@ -14,16 +14,20 @@ namespace Slot_machine
             const int MAX_NUMBER = 10;
 
             //game modes
-            const string C = "Center line";
+            const string CL = "Center lines";
             const string H = "All horizontal lines";
             const string V = "All vertical lines";
             const string D = "All diagonal lines";
 
             //specify the possibilities:
-            const string INSTRUCTION = $"Please select the game mode below!\r\nYou can choose between: \r\nC={C} \r\nH={H} \r\nV={V} \r\nD={D}";
+            const string INSTRUCTION = $"Please select the game mode below!" +
+                $"\r\nFor {CL} press button C" +
+                $"\r\nFor {H} press button H" +
+                $"\r\nFor {V} press button V" +
+                $"\r\nFor {D} press button D";
 
             //creating a 2D array with the desired number of items:
-            //int[,] table = new int[SIZE, SIZE];
+            //int[,] table = new int[SIZE, SIZE]
             int[,] table = { { 1, 2, 1 }, { 2, 1, 2 }, { 1, 2, 1 } };
 
             //defining the random number
