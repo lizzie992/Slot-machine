@@ -26,9 +26,11 @@ namespace Slot_machine
                 $"\r\nFor {V} press button V" +
                 $"\r\nFor {D} press button D";
 
+            const string INSTR_MONEY = $"For every winning line you will earn $1! \r\nHow much money would you like to add? Please, type the amount in dollars: ";
+
             //creating a 2D array with the desired number of items:
             //int[,] table = new int[SIZE, SIZE]
-            int[,] table = { { 1, 2, 1 }, { 2, 1, 2 }, { 1, 2, 1 } };
+            int[,] table = { { 2, 2, 2 }, { 2, 2, 2 }, { 2, 2, 2 } };
 
             //defining the random number
             Random random = new Random();
@@ -52,6 +54,9 @@ namespace Slot_machine
 
             Console.WriteLine(INSTRUCTION);
             string answer = Console.ReadLine().ToUpper();
+
+            Console.WriteLine(INSTR_MONEY);
+            int money = Convert.ToInt32(Console.ReadLine());
 
             //Lets print our grid but in a nice way, every row in a different line:
             for (r = 0; r < SIZE; r++)
@@ -80,6 +85,7 @@ namespace Slot_machine
                             count++;
                             if (count == SIZE - 1)
                             {
+                                money++;
                                 Console.Write($"You win! There is a match in the {r + 1}. horizontal row: ");
                                 for (int x = 0; x < SIZE; x++)
                                 {
@@ -94,6 +100,7 @@ namespace Slot_machine
                         }
                     }
                 }
+                Console.WriteLine($"Your current balance is: ${money}");
             }
 
             if (answer == "V")  // vertical lines:
@@ -113,6 +120,7 @@ namespace Slot_machine
                             count++;
                             if (count == SIZE - 1)
                             {
+                                money++;
                                 Console.Write($"You win! There is a match in the {c + 1}. vertical line: ");
                                 for (int x = 0; x < SIZE; x++)
                                 {
@@ -127,7 +135,9 @@ namespace Slot_machine
                         }
                     }
                 }
+                Console.WriteLine($"Your current balance is: ${money}");
             }
+
 
             if (answer == "C")  // center lines:
             {
@@ -147,6 +157,7 @@ namespace Slot_machine
                         count++;
                         if (count == SIZE - 1)
                         {
+                            money++;
                             Console.Write($"You win! There is a match in the vertical center line: ");
                             for (int x = 0; x < SIZE; x++)
                             {
@@ -174,6 +185,7 @@ namespace Slot_machine
                         count++;
                         if (count == SIZE - 1)
                         {
+                            money++;
                             Console.Write($"You win! There is a match in the horizontal center line: ");
                             for (int x = 0; x < SIZE; x++)
                             {
@@ -187,6 +199,7 @@ namespace Slot_machine
                         }
                     }
                 }
+                Console.WriteLine($"Your current balance is: ${money}");
             }
 
 
@@ -206,6 +219,7 @@ namespace Slot_machine
                         count++;
                         if (count == SIZE - 1)
                         {
+                            money++;
                             Console.Write($"You win! There is a match in the first diagonal line: ");
                             for (int x = 0; x < SIZE; x++)
                             {
@@ -235,6 +249,7 @@ namespace Slot_machine
                         count++;
                         if (count == SIZE - 1)
                         {
+                            money++;
                             Console.Write($"You win! There is a match in the second diagonal line: ");
                             int y = 0;
                             for (int x = SIZE - 1; x >= 0; x--)
@@ -251,6 +266,7 @@ namespace Slot_machine
                         }
                     }
                 }
+                Console.WriteLine($"Your current balance is: ${money}");
             }
         }
     }
