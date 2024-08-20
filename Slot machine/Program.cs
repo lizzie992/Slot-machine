@@ -14,17 +14,17 @@ namespace Slot_machine
             const int MAX_NUMBER = 10;
 
             //game modes
-            const string CL = "Center lines";
-            const string H = "All horizontal lines";
-            const string V = "All vertical lines";
-            const string D = "All diagonal lines";
+            const string CL = "C";
+            const string H = "H";
+            const string V = "V";
+            const string D = "D";
 
             //specify the possibilities:
-            const string INSTRUCTION = $"Please select the game mode below!" +
-                $"\r\nFor {CL} press button C" +
-                $"\r\nFor {H} press button H" +
-                $"\r\nFor {V} press button V" +
-                $"\r\nFor {D} press button D";
+            const string INSTRUCTION = "Please select the game mode below!" +
+                "\r\nFor Center lines press button C" +
+                "\r\nFor All horizontal lines press button H" +
+                "\r\nFor All vertical lines press button V" +
+                "\r\nFor All diagonal lines press button D";
 
             //specify the details about winning and losing money:
             const int WIN = 5;
@@ -35,6 +35,9 @@ namespace Slot_machine
 
             //creating a 2D array with the desired number of items:
             int[,] table = new int[SIZE, SIZE];
+
+            //defining the random number
+            Random random = new Random();
 
             //r = rows, first number in the definition of the 2D array
             //c = columns, second number
@@ -47,9 +50,6 @@ namespace Slot_machine
 
             do
             { 
-                //defining the random number
-                Random random = new Random();
-
                 //adding random elements to the 2D array:
                 for (r = 0; r < SIZE; r++)
                 {
@@ -75,7 +75,7 @@ namespace Slot_machine
                     Console.Write($"\r\n");
                 }
 
-                if (answer == "H")  // horizontal lines:
+                if (answer == H)  // horizontal lines:
                 {
                     for (r = 0; r < SIZE; r++)
                     {
@@ -111,7 +111,7 @@ namespace Slot_machine
                     Console.WriteLine($"Your current balance is: ${money}");
                 }
 
-                if (answer == "V")  // vertical lines:
+                if (answer == V)  // vertical lines:
                 {
                     for (c = 0; c < SIZE; c++)
                     {
@@ -147,7 +147,7 @@ namespace Slot_machine
                     Console.WriteLine($"Your current balance is: ${money}");
                 }
 
-                if (answer == "C")  // center lines:
+                if (answer == CL)  // center lines:
                 {
                     int m = SIZE / 2; //for defining the middle element of the row/column
 
@@ -212,7 +212,7 @@ namespace Slot_machine
                     Console.WriteLine($"Your current balance is: ${money}");
                 }
 
-                if (answer == "D")  // diagonal lines:
+                if (answer == D)  // diagonal lines:
                 {
                     c = 0;
                     int count = 0;
