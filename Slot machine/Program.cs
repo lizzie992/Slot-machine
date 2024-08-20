@@ -280,14 +280,25 @@ namespace Slot_machine
                     Console.WriteLine($"Your current balance is: ${money}");
                 }
 
-                //and then clear the screen before moving on to the next round
-                Console.WriteLine("\r\nPlease press a button to move on to the next round!");
-                Console.ReadKey();
-                Console.Clear();
-
                 if (money <= 0)
                 {
                     Console.WriteLine("You lost all your money!");
+                    break;
+                }
+
+                //possibility to get out with your current balance:
+                Console.WriteLine("\r\nDo you want to keep playing? \r\nPress Y for Yes and N for No!");
+                string decision = Console.ReadLine().ToUpper();
+                if (decision == "Y")
+                {
+                    //clear the screen before moving on to the next round
+                    Console.WriteLine("\r\nPlease press any button to move on to the next round!");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                if (decision == "N")
+                {
+                    Console.WriteLine($"Thank you for playing!\r\nYour balance is: ${money}!\r\nGoodbye!");
                     break;
                 }
             } while (money > 0);
