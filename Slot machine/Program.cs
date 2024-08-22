@@ -14,10 +14,10 @@ namespace Slot_machine
             const int MAX_NUMBER = 10;
 
             //game modes
-            const string CL = "C";
-            const string H = "H";
-            const string V = "V";
-            const string D = "D";
+            const string CENTER_LINE_GAME_OPTION = "C";
+            const string HORIZONTAL_LINE_GAME_OPTION = "H";
+            const string VERTICAL_LINE_GAME_OPTION = "V";
+            const string DIAGONAL_LINE_GAME_OPTION = "D";
 
             //specify the possibilities:
             const string INSTRUCTION = "Please select the game mode below!" +
@@ -29,12 +29,12 @@ namespace Slot_machine
             //specify the details about winning and losing money:
             const int WIN = 5;
             const int LOSE = 1;
-            string INSTR_MONEY = $"For every winning line you will earn ${WIN}!" +
+            string INSTR_FOR_MONEY = $"For every winning line you will earn ${WIN}!" +
                 $"\r\nFor every losing line you will lose ${LOSE}!" +
                 $"\r\nHow much money would you like to add? Please, type the amount in dollars: ";
 
             //creating a 2D array with the desired number of items:
-            int[,] table = new int[SIZE, SIZE];
+            int[,] grid = new int[SIZE, SIZE];
 
             //defining the random number
             Random random = new Random();
@@ -45,8 +45,8 @@ namespace Slot_machine
             int r = 0;
 
             //create an int to keep track of balance:
-            Console.WriteLine(INSTR_MONEY);
-            int money = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(INSTR_FOR_MONEY);
+            int balance = Convert.ToInt32(Console.ReadLine());
 
             do
             { 
@@ -58,46 +58,46 @@ namespace Slot_machine
                         //lets define a random number between 1 and 9
                         int randomNumber = random.Next(MIN_NUMBER, MAX_NUMBER);
                         //and now add it:
-                        table[r, c] = randomNumber;
+                        grid[r, c] = randomNumber;
                     }
                 }
 
                 Console.WriteLine(INSTRUCTION);
-                string answer = Console.ReadLine().ToUpper();
+                string gameMode = Console.ReadLine().ToUpper();
 
                 //Lets print our grid but in a nice way, every row in a different line:
                 for (r = 0; r < SIZE; r++)
                 {
                     for (c = 0; c < SIZE; c++)
                     {
-                        Console.Write(table[r, c]);
+                        Console.Write(grid[r, c]);
                     }
                     Console.Write($"\r\n");
                 }
 
-                if (answer == H)  // horizontal lines:
+                if (gameMode == HORIZONTAL_LINE_GAME_OPTION)  // horizontal lines:
                 {
                     for (r = 0; r < SIZE; r++)
                     {
                         int count = 0;
                         for (c = 0; c < SIZE - 1; c++)
                         {
-                            if (table[r, c] != table[r, c + 1]) //as soon as we have a mismatch, we break the loop and move to the next row
+                            if (grid[r, c] != grid[r, c + 1]) //as soon as we have a mismatch, we break the loop and move to the next row
                             {
-                                money-=LOSE;
+                                balance-=LOSE;
                                 Console.WriteLine($"The {r + 1}. horizontal row did not win!");
                                 break;
                             }
-                            if (table[r, c] == table[r, c + 1]) //if there is a match somewhere in the row:
+                            if (grid[r, c] == grid[r, c + 1]) //if there is a match somewhere in the row:
                             {
                                 count++;
                                 if (count == SIZE - 1)
                                 {
-                                    money+=WIN;
+                                    balance+=WIN;
                                     Console.Write($"You win! There is a match in the {r + 1}. horizontal row: ");
                                     for (int x = 0; x < SIZE; x++)
                                     {
-                                        Console.Write(table[r, x]);
+                                        Console.Write(grid[r, x]);
                                     }
                                     Console.WriteLine($"\r");
                                 }
@@ -108,32 +108,32 @@ namespace Slot_machine
                             }
                         }
                     }
-                    Console.WriteLine($"Your current balance is: ${money}");
+                    Console.WriteLine($"Your current balance is: ${balance}");
                 }
 
-                if (answer == V)  // vertical lines:
+                if (gameMode == VERTICAL_LINE_GAME_OPTION)  // vertical lines:
                 {
                     for (c = 0; c < SIZE; c++)
                     {
                         int count = 0;
                         for (r = 0; r < SIZE - 1; r++)
                         {
-                            if (table[r, c] != table[r + 1, c]) //as soon as we have a mismatch, we break the loop and move to the next row
+                            if (grid[r, c] != grid[r + 1, c]) //as soon as we have a mismatch, we break the loop and move to the next row
                             {
-                                money -= LOSE;
+                                balance -= LOSE;
                                 Console.WriteLine($"The {c + 1}. vertical line did not win!");
                                 break;
                             }
-                            if (table[r, c] == table[r + 1, c]) //if there is a match somewhere in the column:
+                            if (grid[r, c] == grid[r + 1, c]) //if there is a match somewhere in the column:
                             {
                                 count++;
                                 if (count == SIZE - 1)
                                 {
-                                    money += WIN;
+                                    balance += WIN;
                                     Console.Write($"You win! There is a match in the {c + 1}. vertical line: ");
                                     for (int x = 0; x < SIZE; x++)
                                     {
-                                        Console.Write(table[x, c]);
+                                        Console.Write(grid[x, c]);
                                     }
                                     Console.WriteLine($"\r");
                                 }
@@ -144,10 +144,10 @@ namespace Slot_machine
                             }
                         }
                     }
-                    Console.WriteLine($"Your current balance is: ${money}");
+                    Console.WriteLine($"Your current balance is: ${balance}");
                 }
 
-                if (answer == CL)  // center lines:
+                if (gameMode == CENTER_LINE_GAME_OPTION)  // center lines:
                 {
                     int m = SIZE / 2; //for defining the middle element of the row/column
 
@@ -155,22 +155,22 @@ namespace Slot_machine
                     int count = 0;
                     for (r = 0; r < SIZE - 1; r++)
                     {
-                        if (table[r, m] != table[r + 1, m])
+                        if (grid[r, m] != grid[r + 1, m])
                         {
-                            money -= LOSE;
+                            balance -= LOSE;
                             Console.WriteLine($"The vertical center line did not win!");
                             break;
                         }
-                        if (table[r, m] == table[r + 1, m])
+                        if (grid[r, m] == grid[r + 1, m])
                         {
                             count++;
                             if (count == SIZE - 1)
                             {
-                                money += WIN;
+                                balance += WIN;
                                 Console.Write($"You win! There is a match in the vertical center line: ");
                                 for (int x = 0; x < SIZE; x++)
                                 {
-                                    Console.Write(table[x, m]);
+                                    Console.Write(grid[x, m]);
                                 }
                                 Console.WriteLine($"\r");
                             }
@@ -184,22 +184,22 @@ namespace Slot_machine
                     count = 0;
                     for (c = 0; c < SIZE - 1; c++)
                     {
-                        if (table[m, c] != table[m, c + 1])
+                        if (grid[m, c] != grid[m, c + 1])
                         {
-                            money -= LOSE;
+                            balance -= LOSE;
                             Console.WriteLine($"The horizontal center line did not win!");
                             break;
                         }
-                        if (table[m, c] == table[m, c + 1])
+                        if (grid[m, c] == grid[m, c + 1])
                         {
                             count++;
                             if (count == SIZE - 1)
                             {
-                                money += WIN;
+                                balance += WIN;
                                 Console.Write($"You win! There is a match in the horizontal center line: ");
                                 for (int x = 0; x < SIZE; x++)
                                 {
-                                    Console.Write(table[m, x]);
+                                    Console.Write(grid[m, x]);
                                 }
                                 Console.WriteLine($"\r");
                             }
@@ -209,31 +209,31 @@ namespace Slot_machine
                             }
                         }
                     }
-                    Console.WriteLine($"Your current balance is: ${money}");
+                    Console.WriteLine($"Your current balance is: ${balance}");
                 }
 
-                if (answer == D)  // diagonal lines:
+                if (gameMode == DIAGONAL_LINE_GAME_OPTION)  // diagonal lines:
                 {
                     c = 0;
                     int count = 0;
                     for (r = 0; r < SIZE - 1; r++) //for diagonal line top left to bottom right
                     {
-                        if (table[r, c] != table[r + 1, c + 1])
+                        if (grid[r, c] != grid[r + 1, c + 1])
                         {
-                            money -= LOSE;
+                            balance -= LOSE;
                             Console.WriteLine($"The first diagonal line did not win!");
                             break;
                         }
-                        if (table[r, c] == table[r + 1, c + 1])
+                        if (grid[r, c] == grid[r + 1, c + 1])
                         {
                             count++;
                             if (count == SIZE - 1)
                             {
-                                money += WIN;
+                                balance += WIN;
                                 Console.Write($"You win! There is a match in the first diagonal line: ");
                                 for (int x = 0; x < SIZE; x++)
                                 {
-                                    Console.Write(table[x, x]);
+                                    Console.Write(grid[x, x]);
                                 }
                                 Console.WriteLine($"\r");
                                 break;
@@ -249,23 +249,23 @@ namespace Slot_machine
                     for (r = 0; r < SIZE - 1; r++) //for diagonal line top right to bottom left
                     {
                         c--;
-                        if (table[r, c] != table[r + 1, c - 1])
+                        if (grid[r, c] != grid[r + 1, c - 1])
                         {
-                            money -= LOSE;
+                            balance -= LOSE;
                             Console.WriteLine($"The second diagonal line did not win!");
                             break;
                         }
-                        if (table[r, c] == table[r + 1, c - 1])
+                        if (grid[r, c] == grid[r + 1, c - 1])
                         {
                             count++;
                             if (count == SIZE - 1)
                             {
-                                money += WIN;
+                                balance += WIN;
                                 Console.Write($"You win! There is a match in the second diagonal line: ");
                                 int y = 0;
                                 for (int x = SIZE - 1; x >= 0; x--)
                                 {
-                                    Console.Write(table[y, x]);
+                                    Console.Write(grid[y, x]);
                                     y++;
                                 }
                                 Console.WriteLine($"\r");
@@ -277,10 +277,10 @@ namespace Slot_machine
                             }
                         }
                     }
-                    Console.WriteLine($"Your current balance is: ${money}");
+                    Console.WriteLine($"Your current balance is: ${balance}");
                 }
 
-                if (money <= 0)
+                if (balance <= 0)
                 {
                     Console.WriteLine("You lost all your money!");
                     break;
@@ -288,20 +288,22 @@ namespace Slot_machine
 
                 //possibility to get out with your current balance:
                 Console.WriteLine("\r\nDo you want to keep playing? \r\nPress Y for Yes and N for No!");
+                string yes = "Y";
+                string no = "N";
                 string decision = Console.ReadLine().ToUpper();
-                if (decision == "Y")
+                if (decision == yes)
                 {
                     //clear the screen before moving on to the next round
                     Console.WriteLine("\r\nPlease press any button to move on to the next round!");
                     Console.ReadKey();
                     Console.Clear();
                 }
-                if (decision == "N")
+                if (decision == no)
                 {
-                    Console.WriteLine($"Thank you for playing!\r\nYour balance is: ${money}!\r\nGoodbye!");
+                    Console.WriteLine($"Thank you for playing!\r\nYour balance is: ${balance}!\r\nGoodbye!");
                     break;
                 }
-            } while (money > 0);
+            } while (balance > 0);
         }
     }
 }
