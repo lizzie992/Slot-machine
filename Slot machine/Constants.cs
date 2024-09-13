@@ -21,13 +21,6 @@ namespace Slot_machine
         public const string VERTICAL_LINE_GAME_OPTION = "V";
         public const string DIAGONAL_LINE_GAME_OPTION = "D";
 
-        //specify the possibilities:
-        public const string INSTRUCTION = "Please select the game mode below!" +
-            "\r\nFor Center lines press button C" +
-            "\r\nFor All horizontal lines press button H" +
-            "\r\nFor All vertical lines press button V" +
-            "\r\nFor All diagonal lines press button D";
-
         //specify the details about winning and losing money:
         public const int WIN = 5;
         public const int LOSE = 1;

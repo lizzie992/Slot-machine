@@ -26,10 +26,14 @@ namespace Slot_machine
         /// <summary>
         /// Get the game mode from the player.
         /// </summary>
-        public static string GetGameMode(string gameMode)
+        public static string GetGameMode()
         {
-            Console.WriteLine(Constants.INSTRUCTION);
-            gameMode = Console.ReadLine().ToUpper();
+            Console.WriteLine($"Please select the game mode below!" +
+            $"\r\nFor Center lines press button ${Constants.CENTER_LINE_GAME_OPTION}" +
+            $"\r\nFor All horizontal lines press button ${Constants.HORIZONTAL_LINE_GAME_OPTION}" +
+            $"\r\nFor All vertical lines press button ${Constants.VERTICAL_LINE_GAME_OPTION}" +
+            $"\r\nFor All diagonal lines press button ${Constants.DIAGONAL_LINE_GAME_OPTION}");
+            string gameMode = Console.ReadLine().ToUpper();
             return gameMode;
         }
 

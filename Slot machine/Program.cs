@@ -22,7 +22,7 @@ namespace Slot_machine
             {
                 //grid = LogicalCode.AddRandomNumbersToGrid(r, c, grid);
 
-                gameMode = UserInterface.GetGameMode(gameMode);
+                gameMode = UserInterface.GetGameMode();
 
                 UserInterface.PrintGrid(r, c, grid);
 
