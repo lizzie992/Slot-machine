@@ -109,15 +109,7 @@ namespace Slot_machine
             {
                 CheckForWin = CheckForDiagonalWin(grid);
             }
-
-            if (CheckForWin)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return CheckForWin;
         }
 
 
@@ -156,12 +148,8 @@ namespace Slot_machine
                         }
                     }
                 }
-                if (CheckForHorizontalWin)
-                {
-                    return true;
-                }
             }
-            return false;
+            return CheckForHorizontalWin;
         }
 
         /// <summary>
@@ -198,12 +186,8 @@ namespace Slot_machine
                         }
                     }
                 }
-                if (CheckForVerticalWin)
-                {
-                    return true;
-                }
             }
-            return false;
+            return CheckForVerticalWin;
         }
 
         /// <summary>
@@ -262,14 +246,7 @@ namespace Slot_machine
                     }
                 }
             }
-            if (checkForCenterLineWin)
-            {
-                return true;
-            }
-            else
-            {  
-                return false; 
-            }
+            return checkForCenterLineWin;
         }
 
         /// <summary>
@@ -327,14 +304,7 @@ namespace Slot_machine
                     }
                 }
             }
-            if (checkForDiagonalWin)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return checkForDiagonalWin;
         }
     }
 }
