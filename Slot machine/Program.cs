@@ -16,7 +16,7 @@ namespace Slot_machine
             string gameMode = string.Empty;
             string decisionAboutLeaving = string.Empty;
 
-            balance = UserInterface.GetBalanceFromPlayer(balance);
+            balance = UserInterface.GetBalanceFromPlayer();
 
             do
             {

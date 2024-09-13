@@ -13,13 +13,12 @@ namespace Slot_machine
         /// <summary>
         /// Getting the starting balance from the player (how many dollars they want to add)
         /// </summary>
-        public static int GetBalanceFromPlayer(int balance)
+        public static int GetBalanceFromPlayer()
         {
-            string INSTR_FOR_MONEY = $"For every winning line you will earn ${Constants.WIN}!" +
+            Console.WriteLine($"For every winning line you will earn ${Constants.WIN}!" +
                 $"\r\nFor every losing line you will lose ${Constants.LOSE}!" +
-                $"\r\nHow much money would you like to add? Please, type the amount in dollars: ";
-            Console.WriteLine(INSTR_FOR_MONEY);
-            balance = Convert.ToInt32(Console.ReadLine());
+                $"\r\nHow much money would you like to add? Please, type the amount in dollars: ");
+            int balance = Convert.ToInt32(Console.ReadLine());
             return balance;
         }
 
