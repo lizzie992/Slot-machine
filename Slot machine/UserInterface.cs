@@ -44,11 +44,11 @@ namespace Slot_machine
         /// <param name="c">columns, second number</param>
         /// <param name="grid">name of the grid</param>
         /// <returns></returns>
-        public static void PrintGrid(int r, int c, int[,] grid)
+        public static void PrintGrid(int[,] grid)
         {
-            for (r = 0; r < Constants.SIZE; r++)
+            for (int r = 0; r < Constants.SIZE; r++)
             {
-                for (c = 0; c < Constants.SIZE; c++)
+                for (int c = 0; c < Constants.SIZE; c++)
                 {
                     Console.Write(grid[r, c]);
                 }

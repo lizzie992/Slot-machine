@@ -90,24 +90,24 @@ namespace Slot_machine
         /// </summary>
         /// <param name="gameMode">Game mode got from the player</param>
         /// <returns></returns>
-        public static bool CheckForWin(string gameMode, int r, int c, int[,] grid)
+        public static bool CheckForWin(string gameMode, int[,] grid)
         {
             bool CheckForWin = false;
             if (gameMode == Constants.HORIZONTAL_LINE_GAME_OPTION)
             {
-                CheckForWin = CheckForHorizontalWin(r, c, grid);
+                CheckForWin = CheckForHorizontalWin(grid);
             }
             if (gameMode == Constants.VERTICAL_LINE_GAME_OPTION)
             {
-                CheckForWin = CheckForVerticalWin(r, c, grid);
+                CheckForWin = CheckForVerticalWin(grid);
             }
             if (gameMode == Constants.CENTER_LINE_GAME_OPTION)
             {
-                CheckForWin = CheckForCenterLineWin(r, c, grid);
+                CheckForWin = CheckForCenterLineWin(grid);
             }
             if (gameMode == Constants.DIAGONAL_LINE_GAME_OPTION)
             {
-                CheckForWin = CheckForDiagonalWin(r, c, grid);
+                CheckForWin = CheckForDiagonalWin(grid);
             }
 
             if (CheckForWin)
@@ -129,13 +129,13 @@ namespace Slot_machine
         /// <param name="grid">name of the grid</param>
         /// <param name="balance">balance got from the player</param>
         /// <returns></returns>
-        public static bool CheckForHorizontalWin(int r, int c, int[,] grid)
+        public static bool CheckForHorizontalWin(int[,] grid)
         {
             bool CheckForHorizontalWin = false;
-            for (r = 0; r < Constants.SIZE; r++)
+            for (int r = 0; r < Constants.SIZE; r++)
             {
                 int count = 0;
-                for (c = 0; c < Constants.SIZE - 1; c++)
+                for (int c = 0; c < Constants.SIZE - 1; c++)
                 {
                     if (grid[r, c] != grid[r, c + 1]) //as soon as we have a mismatch, we break the loop and move to the next row
                     {
@@ -172,13 +172,13 @@ namespace Slot_machine
         /// <param name="grid">name of the grid</param>
         /// <param name="balance">balance got from the player</param>
         /// <returns></returns>
-        public static bool CheckForVerticalWin(int r, int c, int[,] grid)
+        public static bool CheckForVerticalWin(int[,] grid)
         {
             bool CheckForVerticalWin = false;
-            for (c = 0; c < Constants.SIZE; c++)
+            for (int c = 0; c < Constants.SIZE; c++)
             {
                 int count = 0;
-                for (r = 0; r < Constants.SIZE - 1; r++)
+                for (int r = 0; r < Constants.SIZE - 1; r++)
                 {
                     if (grid[r, c] != grid[r + 1, c]) //as soon as we have a mismatch, we break the loop and move to the next row
                     {
@@ -214,7 +214,7 @@ namespace Slot_machine
         /// <param name="grid">name of the grid</param>
         /// <param name="balance">balance got from the player</param>
         /// <returns></returns>
-        public static bool CheckForCenterLineWin(int r, int c, int[,] grid)
+        public static bool CheckForCenterLineWin(int[,] grid)
         {
             bool checkForCenterLineWin = false;
 
@@ -222,7 +222,7 @@ namespace Slot_machine
             
             //for the vertical center line:
             int count = 0;
-            for (r = 0; r < Constants.SIZE - 1; r++)
+            for (int r = 0; r < Constants.SIZE - 1; r++)
             {
                 if (grid[r, m] != grid[r + 1, m])
                 {
@@ -243,7 +243,7 @@ namespace Slot_machine
             }
             //for the horizontal center line:
             count = 0;
-            for (c = 0; c < Constants.SIZE - 1; c++)
+            for (int c = 0; c < Constants.SIZE - 1; c++)
             {
                 if (grid[m, c] != grid[m, c + 1])
                 {
@@ -280,11 +280,12 @@ namespace Slot_machine
         /// <param name="grid">name of the grid</param>
         /// <param name="balance">balance got from the player</param>
         /// <returns></returns>
-        public static bool CheckForDiagonalWin(int r, int c, int[,] grid)
+        public static bool CheckForDiagonalWin(int[,] grid)
         {
             bool checkForDiagonalWin = false;
             int count = 0;
-            for (r = 0; r < Constants.SIZE - 1; r++) //for diagonal line top left to bottom right
+            int c = 0;
+            for (int r = 0; r < Constants.SIZE - 1; r++) //for diagonal line top left to bottom right
             {
                 if (grid[r, c] != grid[r + 1, c + 1])
                 {
@@ -306,7 +307,7 @@ namespace Slot_machine
             }
             count = 0;
             c = Constants.SIZE;
-            for (r = 0; r < Constants.SIZE - 1; r++) //for diagonal line top right to bottom left
+            for (int r = 0; r < Constants.SIZE - 1; r++) //for diagonal line top right to bottom left
             {
                 c--;
                 if (grid[r, c] != grid[r + 1, c - 1])

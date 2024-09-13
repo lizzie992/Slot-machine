@@ -9,9 +9,6 @@ namespace Slot_machine
             ///int[,] grid = new int[Constants.SIZE, Constants.SIZE];
             int[,] grid = { { 3, 2, 1 }, { 4, 5, 6 }, { 1, 3, 9 } };
 
-            int c = 0; //r = rows, first number in the definition of the 2D array
-            int r = 0; //c = columns, second number
-
             int balance = 0;
             string gameMode = string.Empty;
             string decisionAboutLeaving = string.Empty;
@@ -24,14 +21,14 @@ namespace Slot_machine
 
                 gameMode = UserInterface.GetGameMode();
 
-                UserInterface.PrintGrid(r, c, grid);
+                UserInterface.PrintGrid(grid);
 
-                if (LogicalCode.CheckForWin(gameMode, r, c, grid))
+                if (LogicalCode.CheckForWin(gameMode, grid))
                 {
                     UserInterface.PrintWinMessage();
                     balance = LogicalCode.IncreaseBalance(balance);
                 }
-                if (!LogicalCode.CheckForWin(gameMode, r, c, grid))
+                if (!LogicalCode.CheckForWin(gameMode, grid))
                 {
                     UserInterface.PrintLoseMessage();
                     balance = LogicalCode.DecreaseBalance(balance);
